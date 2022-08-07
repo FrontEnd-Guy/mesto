@@ -1,0 +1,22 @@
+.profile-info__edit-button {
+  margin-top: auto;
+  padding: 0;
+  border: 1px solid #fff;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .profile-info__edit-button {
+    width: 18px;
+    height: 18px;
+  }
+}
