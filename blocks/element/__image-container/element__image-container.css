@@ -1,0 +1,9 @@
+.element__image-container {
+  grid-area: image;
+  height: 282px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}

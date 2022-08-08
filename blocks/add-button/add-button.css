@@ -6,9 +6,9 @@
   color: inherit;
   background-color: transparent;
   cursor: pointer;
-  width: 150px;
+  min-width: 150px;
   height: 50px;
-  flex: 0 1 auto;
+  flex: 0 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;

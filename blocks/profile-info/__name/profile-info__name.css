@@ -6,6 +6,9 @@
   font-weight: 500;
   font-size: clamp(27px, 4vw, 42px);
   line-height: 1.14;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 
