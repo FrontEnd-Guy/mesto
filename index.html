@@ -17,13 +17,9 @@
         <div class="profile-info">
           <h1 class="profile-info__name">Скотт Томас</h1>
           <p class="profile-info__job">Непредсказуемый парень</p>
-          <button class="profile-info__edit-button">
-            <img src="./images/edit.svg" alt="Кнопка редактирования профиля в виде карандаша" class="profile-info__edit-image">
-          </button>
+          <button class="profile-info__edit-button"></button>
         </div>
-        <button class="add-button">
-          <img src="images/add.svg" alt="Кнопка добавить в виде знака плюс." class="add-button__image">
-        </button>
+        <button class="add-button"></button>
       </section>
 
       <section class="elements">
@@ -33,7 +29,7 @@
             <img src="./images/rome.jpg" alt="Фрагмент Колизея." class="element__image">
           </div>
           <h2 class="element__title">Рим</h2>
-          <img src="./images/like.svg" alt="Кнопка лайка в виде сердца" class="element__like">
+          <button class="element__like"></button>
         </article>
 
         <article class="element">
@@ -41,7 +37,7 @@
             <img src="./images/berlin.jpg" alt="Желтый вагон надземного метро в Берлине проезжает над закусочной." class="element__image">
           </div>
           <h2 class="element__title">Берлин</h2>
-          <img src="./images/like.svg" alt="Кнопка лайка в виде сердца" class="element__like">
+          <button class="element__like"></button>
         </article>
 
         <article class="element">
@@ -49,7 +45,7 @@
             <img src="./images/bratislava.jpg" alt="Балконы советской ппанельки." class="element__image">
           </div>
           <h2 class="element__title">Братислава</h2>
-          <img src="./images/like.svg" alt="Кнопка лайка в виде сердца" class="element__like">
+          <button class="element__like"></button>
         </article>
 
         <article class="element">
@@ -57,7 +53,7 @@
             <img src="./images/amsterdam.jpg" alt="Канал в районе Квартала Красных фонарей вечером." class="element__image">
           </div>
           <h2 class="element__title">Амстердам</h2>
-          <img src="./images/like.svg" alt="Кнопка лайка в виде сердца" class="element__like">
+          <button class="element__like"></button>
         </article>
 
         <article class="element">
@@ -65,7 +61,7 @@
             <img src="./images/paris.jpg" alt="Очередь у входа в Лувр." class="element__image">
           </div>
           <h2 class="element__title">Париж</h2>
-          <img src="./images/like.svg" alt="Кнопка лайка в виде сердца" class="element__like">
+          <button class="element__like"></button>
         </article>
 
         <article class="element">
@@ -81,6 +77,15 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
+    <section class="popup">
+      <div class="popup__container">
+        <img src="./images/close.svg" alt="Кнопка закрытия поп-апа в виде крестика." class="popup__close">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input type="text" class="popup__name">
+        <input type="text" class="popup__job">
+        <button class="popup__savebutton">Сохранить</button>
+      </div>
+    </section>
     <script src="/pages/script.js"></script>
   </body>
 </html>

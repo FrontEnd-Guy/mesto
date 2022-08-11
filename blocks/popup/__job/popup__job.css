@@ -1,0 +1,21 @@
+.popup__job {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0;
+  margin-bottom: 48px;
+  padding: 0;
+  padding-bottom: 13px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+}
+
+.popup__job:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 768px) {
+  .popup__job {
+    margin-bottom: 45px;
+  }
+}
