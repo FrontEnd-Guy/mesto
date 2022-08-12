@@ -16,6 +16,11 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  transition: opacity .2s ease-in-out;
+}
+
+.add-button:hover {
+  opacity: .6;
 }
 
 

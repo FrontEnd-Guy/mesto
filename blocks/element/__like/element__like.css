@@ -11,4 +11,14 @@
   margin: auto 30px;
   padding: 0;
   justify-self: end;
+  cursor: pointer;
+  transition: opacity .2s ease-in-out;
+}
+
+.element__like:hover {
+  opacity: .5;
+}
+
+.element__like:active {
+  background-image: url(../../../images/like_active.svg);
 }

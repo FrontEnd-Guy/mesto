@@ -11,6 +11,11 @@
   line-height: 22px;
   text-align: center;
   cursor: pointer;
+  transition: opacity .2s ease-in-out;
+}
+
+.popup__savebutton:hover {
+  opacity: .8;
 }
 
 @media screen and (max-width: 768px) {
