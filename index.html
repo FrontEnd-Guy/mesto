@@ -13,63 +13,51 @@
     </header>
     <main class="content">
       <section class="profile">
-        <div class="avatar"></div>
-        <div class="profile-info">
-          <h1 class="profile-info__name">Скотт Томас</h1>
-          <p class="profile-info__job">Непредсказуемый парень</p>
-          <button class="profile-info__edit-button"></button>
+        <div class="profile__avatar" style="background-image: url(./images/avatar.png);"></div>
+        <div class="profile__profile-info">
+          <h1 class="profile__name">Скотт Томас</h1>
+          <p class="profile__job">Непредсказуемый парень</p>
+          <button aria-label='Edit' class="profile__edit-button" type="button"></button>
         </div>
-        <button class="add-button"></button>
+        <button aria-label='Add' class="profile__add-button" type="button"></button>
       </section>
 
       <section class="elements">
 
         <article class="element">
-          <div class="element__image-container">
-            <img src="./images/rome.jpg" alt="Фрагмент Колизея." class="element__image">
-          </div>
+          <img src="./images/rome.jpg" alt="Фрагмент Колизея." class="element__image">
           <h2 class="element__title">Рим</h2>
-          <button class="element__like"></button>
+          <button aria-label='Like' class="element__like" type="button"></button>
         </article>
 
         <article class="element">
-          <div class="element__image-container">
-            <img src="./images/berlin.jpg" alt="Желтый вагон надземного метро в Берлине проезжает над закусочной." class="element__image">
-          </div>
+          <img src="./images/berlin.jpg" alt="Желтый вагон надземного метро в Берлине проезжает над закусочной." class="element__image">
           <h2 class="element__title">Берлин</h2>
-          <button class="element__like"></button>
+          <button aria-label='Like' class="element__like" type="button"></button>
         </article>
 
         <article class="element">
-          <div class="element__image-container">
-            <img src="./images/bratislava.jpg" alt="Балконы советской ппанельки." class="element__image">
-          </div>
+          <img src="./images/bratislava.jpg" alt="Балконы советской ппанельки." class="element__image">
           <h2 class="element__title">Братислава</h2>
-          <button class="element__like"></button>
+          <button aria-label='Like' class="element__like" type="button"></button>
         </article>
 
         <article class="element">
-          <div class="element__image-container">
-            <img src="./images/amsterdam.jpg" alt="Канал в районе Квартала Красных фонарей вечером." class="element__image">
-          </div>
+          <img src="./images/amsterdam.jpg" alt="Канал в районе Квартала Красных фонарей вечером." class="element__image">
           <h2 class="element__title">Амстердам</h2>
-          <button class="element__like"></button>
+          <button aria-label='Like' class="element__like" type="button"></button>
         </article>
 
         <article class="element">
-          <div class="element__image-container">
-            <img src="./images/paris.jpg" alt="Очередь у входа в Лувр." class="element__image">
-          </div>
+          <img src="./images/paris.jpg" alt="Очередь у входа в Лувр." class="element__image">
           <h2 class="element__title">Париж</h2>
-          <button class="element__like"></button>
+          <button aria-label='Like' class="element__like" type="button"></button>
         </article>
 
         <article class="element">
-          <div class="element__image-container">
-            <img src="./images/london.jpg" alt="Бармен разливает пиво." class="element__image">
-          </div>
+          <img src="./images/london.jpg" alt="Бармен разливает пиво." class="element__image">
           <h2 class="element__title">Лондон</h2>
-          <button class="element__like"></button>
+          <button aria-label='Like' class="element__like" type="button"></button>
         </article>
 
       </section>
@@ -77,15 +65,17 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <section class="popup">
-      <form class="popup__container">
-        <img src="./images/close.svg" alt="Кнопка закрытия поп-апа в виде крестика." class="popup__close">
+    <div class="popup">
+      <div class="popup__container" name="popup">
+        <button aria-label='Close' type="button" class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <input type="text" class="popup__name">
-        <input type="text" class="popup__job">
-        <button type='submit' class="popup__savebutton">Сохранить</button>
-      </form>
-    </section>
+        <form class="popup__form" name="edit-form">
+          <input type="text" class="popup__input popup__input_field_name" name="edit-name" placeholder="Иван Иванов" required>
+          <input type="text" class="popup__input popup__input_field_job" name="edit-job" placeholder="Путешественник-фотограф" required>
+          <button type='submit' class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

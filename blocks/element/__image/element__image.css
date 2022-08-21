@@ -1,4 +1,6 @@
 .element__image {
+  grid-area: image;
   width: 100%;
-  object-fit: contain;
+  max-height: 282px;
+  object-fit: cover;
 }

@@ -1,0 +1,10 @@
+.popup__input_field_job {
+  margin-bottom: 48px;
+  padding-bottom: 13px;
+}
+
+@media screen and (max-width: 768px) {
+  .popup__input_field_job {
+    margin-bottom: 45px;
+  }
+}

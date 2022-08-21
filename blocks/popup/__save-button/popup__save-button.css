@@ -1,4 +1,5 @@
-.popup__savebutton {
+.popup__save-button {
+  width: 100%;
   min-height: 50px;
   margin: 0;
   padding: 0;
@@ -14,12 +15,12 @@
   transition: opacity .2s ease-in-out;
 }
 
-.popup__savebutton:hover {
+.popup__save-button:hover {
   opacity: .8;
 }
 
 @media screen and (max-width: 768px) {
-  .popup__savebutton {
+  .popup__save-button {
     font-size: 14px;
     line-height: 17px;
     max-height: 46px;
