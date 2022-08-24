@@ -4,12 +4,11 @@
                        'job job';
   justify-items: center;
   column-gap: 18px;
-  row-gap: 16px;
   margin: 0 30px;
   flex: 0 1 auto;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 930px) {
   .profile__profile-info {
     margin: 26px auto 36px;
     column-gap: 10px;

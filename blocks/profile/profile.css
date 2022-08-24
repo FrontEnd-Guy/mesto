@@ -1,9 +1,10 @@
 .profile {
   display: flex;
+  margin: 0 auto;
   padding: 40px 0 50px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 930px) {
   .profile {
     flex-direction: column;
     align-items: center;
