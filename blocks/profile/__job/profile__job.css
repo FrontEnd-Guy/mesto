@@ -1,5 +1,5 @@
 .profile__job {
-  grid-area: job; 
+  grid-area: job;
   max-width: 336px;
   justify-self: start;
   font-weight: 400;
