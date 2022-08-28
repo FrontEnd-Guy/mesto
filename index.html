@@ -24,13 +24,15 @@
 
       <section class="elements">
         
-        <template class="template">
+        <template class="template-card">
           <article class="element">
             <img class="element__image">
             <h2 class="element__title"></h2>
             <button aria-label='Like' class="element__like" type="button"></button>
+            <button aria-label='Delete' class="element__delete" type="button"></button>
           </article>
         </template>
+
         <!--
         <article class="element">
           <img src="./images/berlin.jpg" alt="Желтый вагон надземного метро в Берлине проезжает над закусочной." class="element__image">
@@ -88,6 +90,11 @@
           <button type='submit' class="popup__save-button">Сохранить</button>
         </form>
       </div>
+    </div>
+    <div class="popup">
+      <img class="photo-popup__image">
+      <button aria-label='Close' type="button" class="popup__close"></button>
+      <p class="photo-popup__title"></p>
     </div>
     <script src="./scripts/index.js"></script>
   </body>

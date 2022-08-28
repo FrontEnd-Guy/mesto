@@ -29,23 +29,12 @@ const initialCards = [
   
   const cardsElement = document.querySelector('.elements');
   
-  initialCards.forEach((item) => {
-    const html = `
-      <article class="element">
-        <img src="${item.link}" class="element__image">
-        <h2 class="element__title">${item.name}</h2>
-        <button aria-label='Like' class="element__like" type="button"></button>
-      </article>
-    `;
-    cardsElement.insertAdjacentHTML('afterbegin', html);
-  });
-  
   //Форма добавления карточки
   const addPopup = document.querySelectorAll('.popup')[1];
   const addFormElement = document.querySelector('[name="add-form"]');
   const placeNameInputElement = addFormElement.querySelector('.popup__input_field_place-name');
   const placeImageInputElement = addFormElement.querySelector('.popup__input_field_image-link');
-  const templateElement = document.querySelector('.template');
+  const templateCardElement = document.querySelector('.template-card');
 
   const openAddPopup = function() {
     addPopup.classList.add('popup_opened');
@@ -71,12 +60,32 @@ const initialCards = [
     closeAddPopup();
   };
 
+  const handleDelete = (evt) =>{
+    const cardElement = evt.target.closest('.element');
+    cardElement.remove();
+  };
+
   const addCard = function (name, link) {
-    const newCardElement = templateElement.content.cloneNode(true);
+    const newCardElement = templateCardElement.content.cloneNode(true);
     newCardElement.querySelector('.element__title').textContent = name;
     newCardElement.querySelector('.element__image').src = link;
+    
+    newCardElement
+        .querySelector('.element__delete')
+        .addEventListener('click', handleDelete);
+    
+    const cardLike = newCardElement.querySelector('.element__like').addEventListener('click', function(evt) {
+        evt.target.classList.toggle('element__like_active');
+    });
+
     cardsElement.prepend(newCardElement);
+
   };
 
   addFormElement.addEventListener('submit', handleAddSubmit);
   
+  initialCards.forEach((item) => {
+    addCard(item.name, item.link);
+  });
+
+
