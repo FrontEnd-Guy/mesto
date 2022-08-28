@@ -23,13 +23,15 @@
       </section>
 
       <section class="elements">
-
-        <article class="element">
-          <img src="./images/rome.jpg" alt="Фрагмент Колизея." class="element__image">
-          <h2 class="element__title">Рим</h2>
-          <button aria-label='Like' class="element__like" type="button"></button>
-        </article>
-
+        
+        <template class="template">
+          <article class="element">
+            <img class="element__image">
+            <h2 class="element__title"></h2>
+            <button aria-label='Like' class="element__like" type="button"></button>
+          </article>
+        </template>
+        <!--
         <article class="element">
           <img src="./images/berlin.jpg" alt="Желтый вагон надземного метро в Берлине проезжает над закусочной." class="element__image">
           <h2 class="element__title">Берлин</h2>
@@ -59,7 +61,7 @@
           <h2 class="element__title">Лондон</h2>
           <button aria-label='Like' class="element__like" type="button"></button>
         </article>
-
+        -->
       </section>
     </main>
     <footer class="footer">
@@ -72,6 +74,17 @@
         <form class="popup__form" name="edit-form">
           <input type="text" class="popup__input popup__input_field_name" name="edit-name" placeholder="Иван Иванов" required>
           <input type="text" class="popup__input popup__input_field_job" name="edit-job" placeholder="Путешественник-фотограф" required>
+          <button type='submit' class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+    <div class="popup">
+      <div class="popup__container">
+        <button aria-label='Close' type="button" class="popup__close"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="add-form">
+          <input type="text" class="popup__input popup__input_field_place-name" name="add-place" placeholder="Название" required>
+          <input type="text" class="popup__input popup__input_field_image-link" name="add-link" placeholder="Ссылка на картинку" required>
           <button type='submit' class="popup__save-button">Сохранить</button>
         </form>
       </div>
