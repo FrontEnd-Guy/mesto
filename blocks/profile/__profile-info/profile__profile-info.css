@@ -3,6 +3,8 @@
   grid-template-areas: 'name edit-button'
                        'job job';
   justify-items: center;
+  align-content: center;
+  row-gap: 8px;
   column-gap: 18px;
   margin: 0 30px;
   flex: 0 1 auto;

@@ -15,7 +15,7 @@
       <section class="profile">
         <div class="profile__avatar" style="background-image: url(./images/avatar.png);"></div>
         <div class="profile__profile-info">
-          <h1 class="profile__name">Скотт Томас</h1>
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__job">Непредсказуемый парень</p>
           <button aria-label='Edit' class="profile__edit-button" type="button"></button>
         </div>
@@ -23,7 +23,7 @@
       </section>
 
       <section class="elements">
-        
+        <!--template карточки-->
         <template class="template-card">
           <article class="element">
             <img class="element__image">
@@ -32,44 +32,13 @@
             <button aria-label='Delete' class="element__delete" type="button"></button>
           </article>
         </template>
-
-        <!--
-        <article class="element">
-          <img src="./images/berlin.jpg" alt="Желтый вагон надземного метро в Берлине проезжает над закусочной." class="element__image">
-          <h2 class="element__title">Берлин</h2>
-          <button aria-label='Like' class="element__like" type="button"></button>
-        </article>
-
-        <article class="element">
-          <img src="./images/bratislava.jpg" alt="Балконы советской ппанельки." class="element__image">
-          <h2 class="element__title">Братислава</h2>
-          <button aria-label='Like' class="element__like" type="button"></button>
-        </article>
-
-        <article class="element">
-          <img src="./images/amsterdam.jpg" alt="Канал в районе Квартала Красных фонарей вечером." class="element__image">
-          <h2 class="element__title">Амстердам</h2>
-          <button aria-label='Like' class="element__like" type="button"></button>
-        </article>
-
-        <article class="element">
-          <img src="./images/paris.jpg" alt="Очередь у входа в Лувр." class="element__image">
-          <h2 class="element__title">Париж</h2>
-          <button aria-label='Like' class="element__like" type="button"></button>
-        </article>
-
-        <article class="element">
-          <img src="./images/london.jpg" alt="Бармен разливает пиво." class="element__image">
-          <h2 class="element__title">Лондон</h2>
-          <button aria-label='Like' class="element__like" type="button"></button>
-        </article>
-        -->
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
+    <!--Попап едактрование профиля-->
+    <div class="popup popup_action_edit-profile">
       <div class="popup__container">
         <button aria-label='Close' type="button" class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
@@ -80,7 +49,8 @@
         </form>
       </div>
     </div>
-    <div class="popup">
+    <!--Попап добавления карточки-->
+    <div class="popup popup_action_add-place">
       <div class="popup__container">
         <button aria-label='Close' type="button" class="popup__close"></button>
         <h2 class="popup__title">Новое место</h2>
@@ -91,11 +61,15 @@
         </form>
       </div>
     </div>
-    <div class="popup">
-      <img class="photo-popup__image">
-      <button aria-label='Close' type="button" class="popup__close"></button>
-      <p class="photo-popup__title"></p>
+    <!--Попап просмотра фото-->
+    <div class="popup popup_action_view-photo">
+      <figure class="popup__figure">
+        <img class="popup__image" src="">
+        <figcaption class="popup__figcaption"></figcaption>
+        <button aria-label='Close' type="button" class="popup__close"></button>
+      </figure>
     </div>
+    
     <script src="./scripts/index.js"></script>
   </body>
 </html>
