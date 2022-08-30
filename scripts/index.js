@@ -27,14 +27,13 @@ const initialCards = [
   ];
 
 //Попапы
-const popup = document.querySelector('.popup');
 const addPopup = document.querySelector('.popup_action_add-place');
 const editPopup = document.querySelector('.popup_action_edit-profile');
 const photoPopup = document.querySelector('.popup_action_view-photo');
 
 //Кнопки
 const addButton = document.querySelector('.profile__add-button');
-const closeButton = document.querySelectorAll('.popup__close');
+const closeButtons = document.querySelectorAll('.popup__close');
 const editButton = document.querySelector('.profile__edit-button');
 
 //Форма редактирования профиля
@@ -64,7 +63,7 @@ const closePopup = (popup) =>{
   popup.classList.remove('popup_opened');
 };
 
-closeButton.forEach((button) =>{
+closeButtons.forEach((button) =>{
   const popupElement = button.closest('.popup');
   button.addEventListener('click', () => closePopup(popupElement));
  });
@@ -76,14 +75,14 @@ editButton.addEventListener('click', () =>{
   jobInput.value = jobInfo.textContent;
 });
 
-const editFormSubmitHandler = (evt) =>{
+const handleEditFormSubmit = (evt) =>{
   evt.preventDefault();
   nameInfo.textContent = nameInput.value;
   jobInfo.textContent = jobInput.value;
   closePopup(editPopup);
 };
   
-editFormElement.addEventListener('submit', editFormSubmitHandler);
+editFormElement.addEventListener('submit', handleEditFormSubmit);
   
 //Добавление карточки c возможностью лайкать и удалять
 addButton.addEventListener('click', () => openPopup(addPopup));
@@ -94,13 +93,11 @@ const handleAddSubmit = (evt) =>{
   const link = placeImageInputElement.value;
   addCard(name, link);
   closePopup(addPopup);
-  placeNameInputElement.value = '';
-  placeImageInputElement.value = '';
+  evt.target.reset()
 };
 
 const handleDelete = (evt) =>{
-  const cardElement = evt.target.closest('.element');
-  cardElement.remove();
+  evt.target.closest('.element').remove();
 };
 
 const handleLike = (evt) =>{
@@ -109,29 +106,36 @@ const handleLike = (evt) =>{
 
 const handlePhotoView = (name, link) =>{
   photoElement.src = link;
+  photoElement.alt = name;
   photoCaptionElement.textContent = name;
   openPopup(photoPopup);
 }
 
-const addCard = function (name, link) {
-  const newCardElement = templateCardElement.content.cloneNode(true);
-  newCardElement.querySelector('.element__title').textContent = name;
-  newCardElement.querySelector('.element__image').src = link;
+function createCard(name, link) {
+  const cardElement = templateCardElement.content.cloneNode(true);
+  const cardImageElement = cardElement.querySelector('.element__image');
+  
+  cardElement.querySelector('.element__title').textContent = name;
+  cardImageElement.src = link;
+  cardImageElement.alt = name;
     
-  newCardElement
+  cardElement
       .querySelector('.element__delete')
       .addEventListener('click', handleDelete);
 
-  newCardElement
+  cardElement
       .querySelector('.element__like')
       .addEventListener('click', handleLike);
 
-  newCardElement
-      .querySelector('.element__image')
+  cardImageElement
       .addEventListener('click', () => handlePhotoView(name, link));
-   
-  cardsElement.prepend(newCardElement);
 
+  return cardElement
+}
+
+const addCard = function (name, link) {
+  const newCardElement = createCard(name, link)
+  cardsElement.prepend(newCardElement);
 };
 
 addFormElement.addEventListener('submit', handleAddSubmit);
