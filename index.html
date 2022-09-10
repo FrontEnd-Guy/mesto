@@ -43,8 +43,16 @@
         <button aria-label='Close' type="button" class="popup__close"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
         <form class="popup__form" name="edit-form">
-          <input type="text" class="popup__input popup__input_field_name" name="edit-name" placeholder="Иван Иванов" required>
-          <input type="text" class="popup__input popup__input_field_job" name="edit-job" placeholder="Путешественник-фотограф" required>
+          <label class="popup__field">
+            <input type="text" id="name-input" class="popup__input popup__input_field_name" 
+                  name="edit-name" placeholder="Имя" required minlength="2" maxlength="40">
+            <span class="popup__input-error name-input-error"></span>
+          </label>
+          <label class="popup__field">
+            <input type="text" id="job-input" class="popup__input popup__input_field_job" 
+                  name="edit-job" placeholder="О себе" required minlength="2" maxlength="200">
+            <span class="popup__input-error job-input-error"></span>
+          </label>
           <button type='submit' class="popup__save-button">Сохранить</button>
         </form>
       </div>
@@ -55,8 +63,16 @@
         <button aria-label='Close' type="button" class="popup__close"></button>
         <h2 class="popup__title">Новое место</h2>
         <form class="popup__form" name="add-form">
-          <input type="text" class="popup__input popup__input_field_place-name" name="add-place" placeholder="Название" required>
-          <input type="text" class="popup__input popup__input_field_image-link" name="add-link" placeholder="Ссылка на картинку" required>
+          <lable class="popup__field">
+            <input type="text" id="place-input" class="popup__input popup__input_field_place-name" 
+                    name="add-place" placeholder="Название" required minlength="2" maxlength="30">
+            <span class="popup__input-error place-input-error"></span>
+          </lable>
+          <label class="popup__field">
+            <input type="url" id="link-input" class="popup__input popup__input_field_image-link" 
+                  name="add-link" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-error link-input-error"></span>
+          </label>
           <button type='submit' class="popup__save-button">Сохранить</button>
         </form>
       </div>
@@ -70,6 +86,7 @@
       </figure>
     </div>
     
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
   </body>
 </html>

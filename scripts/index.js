@@ -55,12 +55,30 @@ const photoElement = photoPopup.querySelector(".popup__image");
 const photoCaptionElement = photoPopup.querySelector(".popup__figcaption");
 
 //Открытие и закрытие попапа
-const openPopup = (popup) =>{
-  popup.classList.add('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', handleEsc);
+  popup.removeEventListener('click', handleOverlayClick);
 };
 
-const closePopup = (popup) =>{
-  popup.classList.remove('popup_opened');
+function handleEsc(evt) {
+  if (evt.key === 'Escape') {
+    const currentPopup = document.querySelector('.popup_opened');
+    closePopup(currentPopup);
+  }
+};
+
+function handleOverlayClick(evt) {
+  const currentPopup = document.querySelector('.popup_opened');
+  if (evt.target === currentPopup){
+    closePopup(currentPopup);
+  }
+};
+
+function openPopup(popup) {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', handleEsc);
+  popup.addEventListener('click', handleOverlayClick);
 };
 
 closeButtons.forEach((button) =>{
@@ -68,7 +86,18 @@ closeButtons.forEach((button) =>{
   button.addEventListener('click', () => closePopup(popupElement));
  });
 
-//Редактирование профиля
+//Закрытие попапа нажатием на Esc
+
+const popupList = Array.from(document.querySelectorAll('.popup'));
+popupList.forEach((popup) => {
+  popup.addEventListener('keydown', (evt) =>{
+    if (evt.key === 'Escape'){
+      closePopup(popup);
+    }
+  });
+});
+
+ //Редактирование профиля
 editButton.addEventListener('click', () =>{
   openPopup(editPopup);
   nameInput.value = nameInfo.textContent;
@@ -114,7 +143,7 @@ const handlePhotoView = (name, link) =>{
 function createCard(name, link) {
   const cardElement = templateCardElement.content.cloneNode(true);
   const cardImageElement = cardElement.querySelector('.element__image');
-  
+
   cardElement.querySelector('.element__title').textContent = name;
   cardImageElement.src = link;
   cardImageElement.alt = name;
