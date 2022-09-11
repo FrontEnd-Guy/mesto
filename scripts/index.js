@@ -51,7 +51,6 @@ function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEsc);
   popup.addEventListener('click', handleOverlayClick);
-  deactivateButton(popup, validationCongig);
 };
 
 buttonsClosePopup.forEach((button) =>{
@@ -62,6 +61,7 @@ buttonsClosePopup.forEach((button) =>{
  //Редактирование профиля
 buttonEditProfile.addEventListener('click', () =>{
   openPopup(popupEditProfile);
+  deactivateButton(popupEditProfile, validationCongig);
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
 });
@@ -76,7 +76,10 @@ const handleEditFormSubmit = (evt) =>{
 formEditProfile.addEventListener('submit', handleEditFormSubmit);
   
 //Добавление карточки c возможностью лайкать и удалять
-buttonAddCard.addEventListener('click', () => openPopup(popupAddCard));
+buttonAddCard.addEventListener('click', () => {
+  openPopup(popupAddCard);
+  deactivateButton(popupAddCard, validationCongig);
+});
 
 const handleAddSubmit = (evt) =>{
   evt.preventDefault();
