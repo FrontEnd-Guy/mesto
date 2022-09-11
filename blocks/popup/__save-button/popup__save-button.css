@@ -15,7 +15,7 @@
   transition: opacity .2s ease-in-out;
 }
 
-.popup__save-button:hover {
+.popup__save-button:enabled:hover {
   opacity: .8;
 }
 
