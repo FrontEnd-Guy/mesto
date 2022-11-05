@@ -24,6 +24,8 @@
 
 Сайт создан в рамках учебы в [Яндекс.Практикум](https://praktikum.yandex.ru/) на курсе ["Веб-разработчик"](https://praktikum.yandex.ru/web/).
 
+Будущая доработка проекта будет включать в себя создание англоязычной версии сайта.
+
 ## Макет
 
 * [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
