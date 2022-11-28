@@ -1,3 +1,45 @@
+// Шесть карточек «из коробки»
+const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+];
+
+//Конфиг
+const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_visible'
+};
+
+//Импорт модулей
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
+
 //Попапы
 const popupAddCard = document.querySelector('.popup_action_add-place');
 const popupEditProfile = document.querySelector('.popup_action_edit-profile');
@@ -19,7 +61,6 @@ const jobInfo = document.querySelector('.profile__job');
 const formAddCard = document.querySelector('[name="add-form');
 const placeNameInputElement = formAddCard.querySelector('.popup__input_field_place-name');
 const placeImageInputElement = formAddCard.querySelector('.popup__input_field_image-link');
-const templateCardElement = document.querySelector('.template-card');
 const cardsElement = document.querySelector('.elements');
 
 //Окно просмотра фото
@@ -58,10 +99,16 @@ buttonsClosePopup.forEach((button) =>{
   button.addEventListener('click', () => closePopup(popupElement));
  });
 
- //Редактирование профиля
+//Редактирование профиля
+function deactivateButton(popup, config) {
+    const button = popup.querySelector(config.submitButtonSelector);
+    button.setAttribute('disabled', '');
+    button.classList.add(config.inactiveButtonClass);
+};
+
 buttonEditProfile.addEventListener('click', () =>{
   openPopup(popupEditProfile);
-  deactivateButton(popupEditProfile, validationCongig);
+  deactivateButton(popupEditProfile, validationConfig);
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
 });
@@ -74,11 +121,26 @@ const handleEditFormSubmit = (evt) =>{
 };
   
 formEditProfile.addEventListener('submit', handleEditFormSubmit);
-  
-//Добавление карточки c возможностью лайкать и удалять
+
+//Валидация форм
+const formList = document.querySelectorAll(validationConfig.formSelector);
+formList.forEach((formElement) =>{
+    const formValidator = new FormValidator(validationConfig, formElement);
+    formValidator.enableValidation();
+});
+
+//Открытие изображения по клику на картинку
+const handlePhotoView = (name, link) =>{
+    photoElement.src = link;
+    photoElement.alt = name;
+    photoCaptionElement.textContent = name;
+    openPopup(popupViewPicture);
+  }
+
+//Добавление карточки
 buttonAddCard.addEventListener('click', () => {
   openPopup(popupAddCard);
-  deactivateButton(popupAddCard, validationCongig);
+  deactivateButton(popupAddCard, validationConfig);
 });
 
 const handleAddSubmit = (evt) =>{
@@ -90,51 +152,19 @@ const handleAddSubmit = (evt) =>{
   evt.target.reset()
 };
 
-const handleDelete = (evt) =>{
-  evt.target.closest('.element').remove();
-};
-
-const handleLike = (evt) =>{
-  evt.target.classList.toggle('element__like_active');
-};
-
-const handlePhotoView = (name, link) =>{
-  photoElement.src = link;
-  photoElement.alt = name;
-  photoCaptionElement.textContent = name;
-  openPopup(popupViewPicture);
-}
-
-function createCard(name, link) {
-  const cardElement = templateCardElement.content.querySelector('.element').cloneNode(true);
-  const cardImageElement = cardElement.querySelector('.element__image');
-
-  cardElement.querySelector('.element__title').textContent = name;
-  cardImageElement.src = link;
-  cardImageElement.alt = name;
-    
-  cardElement
-      .querySelector('.element__delete')
-      .addEventListener('click', handleDelete);
-
-  cardElement
-      .querySelector('.element__like')
-      .addEventListener('click', handleLike);
-
-  cardImageElement
-      .addEventListener('click', () => handlePhotoView(name, link));
-
-  return cardElement
-}
-
-const addCard = function (name, link) {
-  const newCardElement = createCard(name, link)
-  cardsElement.prepend(newCardElement);
+function addCard(item) {
+    const card = new Card(item, '.template-card');
+    const cardElement = card.createCard();
+    cardElement
+        .querySelector('.element__image')
+        .addEventListener('click', () => handlePhotoView(item.name, item.link));
+    cardsElement.prepend(cardElement);
 };
 
 formAddCard.addEventListener('submit', handleAddSubmit);
 
 //Добавление дефолтных карточек
+
 initialCards.forEach((item) => {
-  addCard(item.name, item.link);
+    addCard(item);
 });
