@@ -82,9 +82,8 @@ function handleEsc(evt) {
 };
 
 function handleOverlayClick(evt) {
-  const currentPopup = document.querySelector('.popup_opened');
-  if (evt.target === currentPopup){
-    closePopup(currentPopup);
+  if (evt.target.classList.contains('popup')){
+    closePopup(evt.target);
   }
 };
 
@@ -99,16 +98,19 @@ buttonsClosePopup.forEach((button) =>{
   button.addEventListener('click', () => closePopup(popupElement));
  });
 
+//Валидация форм
+
+const profileValidation = new FormValidator(validationConfig, formEditProfile);
+const newCardValidation = new FormValidator(validationConfig, formAddCard);
+profileValidation.enableValidation();
+newCardValidation.enableValidation(); 
+
+
 //Редактирование профиля
-function deactivateButton(popup, config) {
-    const button = popup.querySelector(config.submitButtonSelector);
-    button.setAttribute('disabled', '');
-    button.classList.add(config.inactiveButtonClass);
-};
 
 buttonEditProfile.addEventListener('click', () =>{
   openPopup(popupEditProfile);
-  deactivateButton(popupEditProfile, validationConfig);
+  profileValidation.resetValidation();
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
 });
@@ -122,13 +124,6 @@ const handleEditFormSubmit = (evt) =>{
   
 formEditProfile.addEventListener('submit', handleEditFormSubmit);
 
-//Валидация форм
-const formList = document.querySelectorAll(validationConfig.formSelector);
-formList.forEach((formElement) =>{
-    const formValidator = new FormValidator(validationConfig, formElement);
-    formValidator.enableValidation();
-});
-
 //Открытие изображения по клику на картинку
 const handlePhotoView = (name, link) =>{
     photoElement.src = link;
@@ -140,31 +135,39 @@ const handlePhotoView = (name, link) =>{
 //Добавление карточки
 buttonAddCard.addEventListener('click', () => {
   openPopup(popupAddCard);
-  deactivateButton(popupAddCard, validationConfig);
+  newCardValidation.resetValidation();
+  placeNameInputElement.value = '';
+  placeImageInputElement.value = '';
 });
+
+
+function createCard(item){
+    const card = new Card(item, '.template-card', handlePhotoView);
+    const cardElement = card.createCard();
+    return cardElement;
+}
+
+function addCard(item) {
+    cardsElement.prepend(item);
+};
 
 const handleAddSubmit = (evt) =>{
   evt.preventDefault();
+  
   const name = placeNameInputElement.value;
   const link = placeImageInputElement.value;
-  addCard(name, link);
+  
+  const card = {name, link};
+  addCard(createCard(card));
   closePopup(popupAddCard);
   evt.target.reset()
 };
 
-function addCard(item) {
-    const card = new Card(item, '.template-card');
-    const cardElement = card.createCard();
-    cardElement
-        .querySelector('.element__image')
-        .addEventListener('click', () => handlePhotoView(item.name, item.link));
-    cardsElement.prepend(cardElement);
-};
 
 formAddCard.addEventListener('submit', handleAddSubmit);
 
 //Добавление дефолтных карточек
 
 initialCards.forEach((item) => {
-    addCard(item);
+    addCard(createCard(item));
 });
