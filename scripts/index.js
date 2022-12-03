@@ -110,9 +110,9 @@ newCardValidation.enableValidation();
 
 buttonEditProfile.addEventListener('click', () =>{
   openPopup(popupEditProfile);
-  profileValidation.resetValidation();
   nameInput.value = nameInfo.textContent;
   jobInput.value = jobInfo.textContent;
+  profileValidation.resetValidation();
 });
 
 const handleEditFormSubmit = (evt) =>{
@@ -135,9 +135,8 @@ const handlePhotoView = (name, link) =>{
 //Добавление карточки
 buttonAddCard.addEventListener('click', () => {
   openPopup(popupAddCard);
+  formAddCard.reset();
   newCardValidation.resetValidation();
-  placeNameInputElement.value = '';
-  placeImageInputElement.value = '';
 });
 
 
@@ -160,7 +159,6 @@ const handleAddSubmit = (evt) =>{
   const card = {name, link};
   addCard(createCard(card));
   closePopup(popupAddCard);
-  evt.target.reset()
 };
 
 
