@@ -13,7 +13,7 @@
     </header>
     <main class="content">
       <section class="profile">
-        <div class="profile__avatar" style="background-image: url(./images/avatar.png);"></div>
+        <img src="<%=require('./images/avatar.png')%>" alt="Автарака пользователя" class="profile__avatar">
         <div class="profile__profile-info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__job">Непредсказуемый парень</p>
@@ -85,6 +85,6 @@
         <button aria-label='Close' type="button" class="popup__close"></button>
       </figure>
     </div>
-    <script src="./scripts/index.js" type="module"></script>
+    <script src="./pages/index.js" type="module"></script>
   </body>
 </html>

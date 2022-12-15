@@ -1,9 +1,9 @@
 export class Card {
-    constructor(data, templateSelector, viewPicture) {
+    constructor(data, templateSelector, handleCardClick) {
       this._name = data.name;
       this._link = data.link;
       this._templateSelector = templateSelector;
-      this.viewPicture = viewPicture;
+      this.handleCardClick = handleCardClick;
     };
   
     _getTemplate() {
@@ -37,7 +37,7 @@ export class Card {
 
         this._likeButton.addEventListener('click', () => (this._handleLike()));
 
-        this._cardImage.addEventListener('click', () => (this._handleOpenPicture()));
+        this._cardImage.addEventListener('click', () => (this.handleCardClick(this._name, this._link)));
     };
 
     _handleDelete() {
@@ -48,8 +48,4 @@ export class Card {
     _handleLike() {
         this._likeButton.classList.toggle('element__like_active');
     };
-
-    _handleOpenPicture() {
-      this.viewPicture(this._name, this._link);
-    }
   }
