@@ -67,7 +67,7 @@ buttonEditProfile.addEventListener('click', () =>{
 });
 
 function handleEditFormSubmit (data) {
-  userInfo.setUserInfo(Object.values(data));
+  userInfo.setUserInfo(data);
 };
 
 //Открытие изображения по клику на картинку
@@ -78,7 +78,6 @@ function handlePhotoView (name, link) {
 //Добавление карточки
 buttonAddCard.addEventListener('click', () => {
   popupAddCard.open();
-  formAddCard.reset();
   newCardValidation.resetValidation();
 });
 

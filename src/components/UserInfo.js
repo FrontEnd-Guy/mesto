@@ -11,9 +11,9 @@ export class UserInfo {
         };
     };
 
-    setUserInfo([newName, newDescription]){
-        this._name.textContent = newName;
-        this._description.textContent = newDescription;
+    setUserInfo(data){
+        this._name.textContent = data['edit-name'];      
+        this._description.textContent = data['edit-job'];
     };
 
 }
