@@ -1,5 +1,5 @@
 // Шесть карточек «из коробки»
-const initialCards = [
+/* const initialCards = [
     {
       name: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -25,7 +25,7 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
-
+*/
 //Конфиг
 const validationConfig = {
     formSelector: '.popup__form',
@@ -36,22 +36,38 @@ const validationConfig = {
     errorClass: 'popup__input-error_visible'
 };
 
+const apiConfig = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-56',
+  headers: {
+    'authorization': '92d2b0f4-0f2d-4b0a-a7d7-4567fc3463f5',
+    'Content-Type': 'application/json'
+  },
+}
+
+const avatar = document.querySelector('.profile__avatar');
 const buttonAddCard = document.querySelector('.profile__add-button');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
+const buttonUpdateAvatar = document.querySelector('.profile__avatar-edit-button');
 const formEditProfile = document.querySelector('[name="edit-form"]');
 const formAddCard = document.querySelector('[name="add-form"]');
+const formUpdateAvatar = document.querySelector('[name="avatar-form"]');
+const profileName = document.querySelector('.profile__name');
+const profileDescription = document.querySelector('.profile__job');
+const profileAvatar = document.querySelector('.profile__avatar');
 const nameInput = formEditProfile.querySelector('.popup__input_field_name');
 const jobInput = formEditProfile.querySelector('.popup__input_field_job');
-const placeNameInputElement = formAddCard.querySelector('.popup__input_field_place-name');
-const placeImageInputElement = formAddCard.querySelector('.popup__input_field_image-link');
 
-export {initialCards, 
-    validationConfig, 
+export {validationConfig,
+    apiConfig,
+    avatar, 
     buttonAddCard, 
-    buttonEditProfile, 
+    buttonEditProfile,
+    buttonUpdateAvatar, 
     formEditProfile,
     formAddCard,
+    formUpdateAvatar,
+    profileName,
+    profileDescription,
+    profileAvatar,
     nameInput, 
-    jobInput, 
-    placeImageInputElement, 
-    placeNameInputElement}
+    jobInput}

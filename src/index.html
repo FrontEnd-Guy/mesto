@@ -13,13 +13,16 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img src="<%=require('./images/avatar.png')%>" alt="Автарака пользователя" class="profile__avatar">
+        <div class="profile__avatar-container">
+          <img src="<%=require('./images/avatar.png')%>" alt="Автарака пользователя" class="profile__avatar">
+          <button area-label='Edit Profile Picture' class="profile__avatar-edit-button" type="button"></button>
+        </div>
         <div class="profile__profile-info">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <p class="profile__job">Непредсказуемый парень</p>
-          <button aria-label='Edit' class="profile__edit-button" type="button"></button>
+          <button aria-label='Edit Profile Info' class="profile__edit-button" type="button"></button>
         </div>
-        <button aria-label='Add' class="profile__add-button" type="button"></button>
+        <button aria-label='Add Card' class="profile__add-button" type="button"></button>
       </section>
 
       <section class="elements">
@@ -28,7 +31,10 @@
           <article class="element">
             <img class="element__image">
             <h2 class="element__title"></h2>
-            <button aria-label='Like' class="element__like" type="button"></button>
+            <div class="element__like-container">
+              <button aria-label='Like' class="element__like" type="button"></button>
+              <span class="element__like-counter">10</span>
+            </div>
             <button aria-label='Delete' class="element__delete" type="button"></button>
           </article>
         </template>
@@ -84,6 +90,31 @@
         <figcaption class="popup__figcaption"></figcaption>
         <button aria-label='Close' type="button" class="popup__close"></button>
       </figure>
+    </div>
+    <!--Попап удаления карточки-->
+    <div class="popup popup_action_delete-card">
+      <div class="popup__container">
+        <button aria-label='Close' type="button" class="popup__close"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <form class="popup__form" name="delete-form">
+          <button type='submit' class="popup__save-button">Да</button>
+        </form>
+      </div>
+    </div>
+    <!--Попап обновления аватара-->
+    <div class="popup popup_action_update-avatar">
+      <div class="popup__container">
+        <button aria-label='Close' type="button" class="popup__close"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" name="avatar-form">
+          <label class="popup__field">
+            <input type="url" id="link-input" class="popup__input popup__input_field_image-link" 
+                  name="avatar-link" placeholder="Ссылка на картинку" required>
+            <span class="popup__input-error link-input-error"></span>
+          </label>
+          <button type='submit' class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
     </div>
   </body>
 </html>

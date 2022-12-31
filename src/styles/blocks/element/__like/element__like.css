@@ -5,12 +5,10 @@
   background-repeat: no-repeat;
   border: none;
   background-color: transparent;
-  grid-area: like;
   width: 23px;
   height: 19px;
-  margin: auto 20px;
+  margin: 0;
   padding: 0;
-  justify-self: end;
   cursor: pointer;
   transition: opacity .2s ease-in-out;
 }
