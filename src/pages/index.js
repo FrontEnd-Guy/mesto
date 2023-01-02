@@ -1,3 +1,4 @@
+//Импорт файла стилей
 import './index.css';
 
 //Импорт констант
@@ -7,9 +8,6 @@ import {validationConfig,
   formEditProfile,
   formAddCard,
   formUpdateAvatar,
-  profileName,
-  profileDescription,
-  profileAvatar,
   buttonAddCard, 
   buttonEditProfile,
   buttonUpdateAvatar, 
@@ -26,8 +24,6 @@ import { PopupWithConfirmation } from '../components/PopupWithConfirmation.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { API } from '../components/API.js';
 
-const api = new API(apiConfig);
-
 //Попапы
 const popupAddCard = new PopupWithForm('.popup_action_add-place', handleAddSubmit);
 popupAddCard.setEventListeners();
@@ -40,39 +36,6 @@ popupDeleteCard.setEventListeners();
 const popupUpdateAvatar = new PopupWithForm('.popup_action_update-avatar', handleUpdateAvatarSubmit);
 popupUpdateAvatar.setEventListeners();
 
-//Создание переменной для ID
-let myId = 0;
-
-//Заполнение данных профиля и переопределение ID
-api.getUserInfo().then((result)=>{
-  profileName.textContent = result.name;
-  profileDescription.textContent = result.about;
-  profileAvatar.src = result.avatar;
-  myId = result._id;
-})
-.catch((err) => {
-  console.log(err);
-});
-
-//Добавление дефолтных карточек
-function renderCard(item) {
-  const newCard = createCard(item);
-  cardsElement.addItem(newCard);
-}
-
-const cardsElement = new Section({ 
-  renderer: renderCard,
-}, 
-'.elements');
-
-api.getCardsList().then((cards)=>{
-  cardsElement.renderItems(cards)
-})
-.catch((err) => {
-  console.log(err);
-});
-
-
 //Валидация форм
 const profileValidation = new FormValidator(validationConfig, formEditProfile);
 const newCardValidation = new FormValidator(validationConfig, formAddCard);
@@ -81,13 +44,42 @@ profileValidation.enableValidation();
 newCardValidation.enableValidation(); 
 avatarUpdateValidation.enableValidation();
 
+//Классы
+const api = new API(apiConfig);
 
-//Редактирование профиля
+const cardsElement = new Section({ 
+  renderer: renderCard,
+}, 
+'.elements');
+
 const userInfo = new UserInfo({
   nameSelector: '.profile__name',
-  descriptionSelector: '.profile__job'
+  descriptionSelector: '.profile__job',
+  avatarSelector: '.profile__avatar'
 });
 
+//Создание переменной для ID
+let myId = 0;
+
+//Отрисовка данных профиля и карточек мест, переопределение ID
+Promise.all([api.getUserInfo(), api.getCardsList()])
+  .then(([userData, cards]) => {
+    userInfo.setUserInfo(userData);
+    myId = userData._id;
+    cardsElement.renderItems(cards);
+  })
+  .catch((err) =>{
+    console.log(err);
+  });
+
+//Добавление дефолтных карточек
+function renderCard(item) {
+  const newCard = createCard(item);
+  cardsElement.addItem(newCard);
+}
+
+
+//Редактирование профиля
 
 buttonEditProfile.addEventListener('click', () =>{
   const {name, about} = userInfo.getUserInfo();
@@ -101,6 +93,7 @@ function handleEditFormSubmit (data) {
   api.editUserInfo({name: data['edit-name'], about: data['edit-job']})
     .then((result)=>{
       userInfo.setUserInfo(result);
+      popupEditProfile.close();
     })
     .catch((err) =>{
       console.log(`Ошибка ${err}`)
@@ -111,11 +104,15 @@ function handleEditFormSubmit (data) {
 };
 
 //Обновление аватара
-buttonUpdateAvatar.addEventListener('click', () => popupUpdateAvatar.open());
+buttonUpdateAvatar.addEventListener('click', () => {
+  popupUpdateAvatar.open();
+  avatarUpdateValidation.resetValidation();
+});
 
 function handleUpdateAvatarSubmit(data){
   api.updateAvatar({avatar: data["avatar-link"]}).then((result) => {
-    avatar.src = result.avatar
+    avatar.src = result.avatar;
+    popupUpdateAvatar.close();
   })
   .catch((err) =>{
     console.log(`Ошибка ${err}`)
@@ -158,6 +155,7 @@ function handleDeleteButtonClick(card) {
   popupDeleteCard.open(()=>{
     api.deleteCard(card.id).then(()=>{
       card.delete();
+      popupDeleteCard.close();
     })
     .catch((err) => {
       console.log(err);
@@ -181,6 +179,7 @@ function createCard(item){
 function handleAddSubmit (data) {
   api.createCard({name: data['add-place'], link: data['add-link']}).then((card)=>{
     renderCard(card);
+    popupAddCard.close();
   })
   .catch((err) =>{
     console.log(`Ошибка ${err}`)
